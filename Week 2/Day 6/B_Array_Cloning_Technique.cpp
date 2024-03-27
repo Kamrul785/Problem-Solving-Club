@@ -30,7 +30,6 @@ int main()
         while (mx < n)
         {
             ll rem = n - mx;
-            ll add = mx;
             ans++;
             ans += min(rem, mx);
             mx += min(rem, mx);
