@@ -9,40 +9,43 @@ int main()
     cin.tie(NULL);
     string s;
     cin >> s;
-    ll nb, ns, nc, pb, ps, pc;
-    cin >> nb >> ns >> nc >> pb >> ps >> pc;
-    ll rub;
+    ll n1, n2, n3, p1, p2, p3, rub;
+    cin >> n1 >> n2 >> n3;
+    cin >> p1 >> p2 >> p3;
     cin >> rub;
-
     ll a = 0, b = 0, c = 0;
-    for (auto &c : s)
+    for (auto &ch : s)
     {
-        if (c == 'B')
+        if (ch == 'B')
             a++;
-        else if (c == 'S')
+        else if (ch == 'S')
             b++;
         else
             c++;
     }
 
-    auto ok = [&](ll mid)
-    {
-        ll z = 0;
-        ll rb = max(((a * mid) - nb), z);
-        ll rs = max(((b * mid) - ns), z);
-        ll rc = max(((c * mid) - nc), z);
-        ll reqprice = rb * pb + rs * ps + rc * pc;
-        return reqprice <= rub;
-    };
+    // auto ok = [&](int mid)
+    // {
+    //     ll x = max((a * mid) - n1, 0ll);
+    //     ll y = max((b * mid) - n2, 0ll);
+    //     ll z = max((c * mid) - n3, 0ll);
+    //     ll reqprice = (x * p1 + y * p2 + z * p3);
 
+    //     return reqprice <= rub;
+    // };
     ll l = 0, r = rub + 200, ans = 0;
     while (l <= r)
     {
         ll mid = l + (r - l) / 2;
-        if (ok(mid))
+        ll m = 0;
+        ll x = max((a * mid) - n1, m);
+        ll y = max((b * mid) - n2, m);
+        ll z = max((c * mid) - n3, m);
+        ll reqprice = (x * p1 + y * p2 + z * p3);
+        if (reqprice <= rub)
         {
-            ans = mid;
             l = mid + 1;
+            ans = mid;
         }
         else
         {
@@ -50,6 +53,5 @@ int main()
         }
     }
     cout << ans << endl;
-
     return 0;
 }
